@@ -10,8 +10,14 @@ def repeat(s):
     return res
 
 a = "abcdefghiklmnopqrstuvwxyz"
-b = list(input("Enter your message: ").lower().replace('j', 'i'))
+b = list(input("Enter your message: "))
 c = input("Enter your key: ").lower()
+
+if 'j' in b:
+    ind = b.index("j")
+    b.insert(ind,"i")
+    b.remove('j')
+    b="".join(b)
 
 c_unique = ''.join(repeat(c))
 e = "".join([x for x in a if x not in c_unique])
@@ -35,6 +41,7 @@ b_matrix = [b[i:i + 2] for i in range(0, len(b), 2)]
 encrypted_message = []
 for pair in b_matrix:
     char1, char2 = pair
+    print("pair",pair)
     x1, y1 = np.where(arr == char1)
     x2, y2 = np.where(arr == char2)
     x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
@@ -45,7 +52,7 @@ for pair in b_matrix:
         encrypted_pair = arr[(x1 + 1) % 5, y1], arr[(x2 + 1) % 5, y2]
     else:
         encrypted_pair = arr[x1, y2], arr[x2, y1]
-    
+    print(encrypted_pair)
     for x in encrypted_pair:
         encrypted_message.append(x)
 
